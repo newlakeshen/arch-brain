@@ -89,7 +89,7 @@ Project Profile:
 
 ## Phase 2: Architecture Dialogue
 
-One-question-at-a-time conversation covering goals, constraints, pain points.
+**STRICTLY one question at a time.** Ask one question → wait for user's full answer → decide whether to ask a follow-up or move on. NEVER bundle multiple questions in a single message — the user cannot answer well when facing 2+ questions at once.
 
 **Detect anti-patterns** (when code was analyzed) — use the anti-pattern table from Architecture Pattern Library above. Proactively warn user about detected anti-patterns.
 
