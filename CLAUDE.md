@@ -4,6 +4,8 @@ Claude Code skill，充当资深软件架构师，用于架构评审、重构分
 
 ## 项目结构
 
+- `README.md` — 英文文档
+- `README.zh-CN.md` — 中文文档
 - `docs/superpowers/specs/` — 设计规格文档
 - `docs/superpowers/plans/` — 实施计划文档
 - Skill 安装目录: `~/.claude/skills/arch-brain/`
