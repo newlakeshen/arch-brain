@@ -6,7 +6,7 @@ A skill for Claude Code and Codex CLI that acts as an opinionated senior softwar
 
 ## Features
 
-- **Project Fingerprint Engine** — Auto-detect tech stack, architecture style, scale, and team traits from codebase
+- **Project Architecture Discovery** — Auto-detect tech stack, architecture style, scale, and team traits from codebase
 - **Architecture Pattern Library** — Identify patterns (layered, microservices, hexagonal, CQRS, event-driven, etc.) and detect anti-patterns
 - **Evidence-Based Scoring** — Quantified evaluation with concrete criteria per dimension and judgment labels (✅/⚠️/🚨)
 - **Risk Scenario Analysis** — What-if analysis (10x traffic, service failure, tech debt accumulation, team turnover)
@@ -22,7 +22,7 @@ Four-phase interactive process with user confirmation at each stage:
 Phase 1: Explore & Understand → Phase 2: Architecture Dialogue → Phase 3: Assessment → Phase 4: Report
 ```
 
-1. **Explore & Understand** — Project fingerprint analysis (reads CLAUDE.md/README.md first, then scans technical metadata) or dialogue-guided context gathering
+1. **Explore & Understand** — Project architecture discovery (reads CLAUDE.md/README.md first, then scans technical metadata) or dialogue-guided context gathering
 2. **Architecture Dialogue** — Goals, constraints, pain points; anti-pattern detection; context-driven dimension recommendation
 3. **Assessment** — Evidence-based scoring with concrete criteria, judgment labels, risk scenario analysis, opinionated advisor style
 4. **Report** — Structured document with project profile, core opinions, Mermaid diagrams, risk scenarios, and ADR appendix
@@ -53,7 +53,7 @@ cd arch-brain
 Invoke via `/arch-brain` in Claude Code:
 
 ```bash
-# Analyze a codebase (triggers fingerprint engine)
+# Analyze a codebase (triggers architecture discovery)
 /arch-brain ./src
 
 # Analyze architecture documentation
@@ -62,7 +62,7 @@ Invoke via `/arch-brain` in Claude Code:
 # Analyze with stated intent
 /arch-brain ./src "want to split into microservices"
 
-# Dialogue-guided mode (no arguments, skips fingerprint engine)
+# Dialogue-guided mode (no arguments, skips architecture discovery)
 /arch-brain
 ```
 
@@ -89,7 +89,7 @@ Testability, Observability, Team Cognitive Load, Tech Debt, Migration Risk, Data
 
 Reports are saved to `docs/arch-brain/reports/YYYY-MM-DD-<topic>.md` and include:
 
-- **Project Profile** — Auto-generated from fingerprint engine
+- **Project Profile** — Auto-generated from architecture discovery
 - **Architect Core Opinions** — 3-5 key findings with strong judgments
 - **Current State Analysis** — With Mermaid architecture diagram
 - **Core Dimension Scoring** — Evidence-based with judgment labels (✅/⚠️/🚨)

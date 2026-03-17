@@ -27,16 +27,16 @@ description: Use when manually invoked to perform architecture review, refactori
 
 | 输入类型 | 示例 | 处理方式 |
 |---------|------|---------|
-| 代码库路径 | `/arch-brain ./src` | 执行项目指纹分析，生成画像 |
+| 代码库路径 | `/arch-brain ./src` | 执行项目架构了解，生成画像 |
 | 架构文档路径 | `/arch-brain docs/architecture.md` | 读取文档，提取架构要素 |
-| 代码库 + 意图描述 | `/arch-brain ./src 想拆成微服务` | 指纹分析 + 结合意图识别差距 |
-| 无参数 | `/arch-brain` | 对话引导模式（跳过指纹引擎，直接进入对话） |
+| 代码库 + 意图描述 | `/arch-brain ./src 想拆成微服务` | 架构了解 + 结合意图识别差距 |
+| 无参数 | `/arch-brain` | 对话引导模式（跳过架构了解，直接进入对话） |
 
 ---
 
-## 一、项目指纹引擎
+## 一、项目架构了解
 
-当用户提供代码库路径时，Phase 1 自动执行项目指纹分析。**无参数调用时跳过指纹引擎，直接通过对话收集项目信息。**
+当用户提供代码库路径时，Phase 1 自动执行项目架构了解。**无参数调用时跳过架构了解，直接通过对话收集项目信息。**
 
 ### 信号采集策略（按优先级）
 
@@ -58,7 +58,7 @@ description: Use when manually invoked to perform architecture review, refactori
 | 代码统计 | 文件数量、代码行数、语言分布 | 项目规模 |
 | Git 信息 | 贡献者数量、提交频率 | 团队规模、协作模式 |
 
-### 指纹输出格式
+### 项目画像输出格式
 
 ```
 项目画像:
@@ -187,7 +187,7 @@ description: Use when manually invoked to perform architecture review, refactori
 
 ## 四、风险情景分析
 
-Phase 3 评估完维度后，根据项目指纹自动选择 2-3 个最相关的情景进行 What-If 推演。
+Phase 3 评估完维度后，根据项目画像自动选择 2-3 个最相关的情景进行 What-If 推演。
 
 ### 标准情景集
 
@@ -289,7 +289,7 @@ Phase 4 报告中生成 Mermaid 图辅助架构分析。
 
 ## 八、上下文驱动维度推荐
 
-Phase 2 结束后，基于项目指纹自动推荐维度组合。
+Phase 2 结束后，基于项目画像自动推荐维度组合。
 
 ### 推荐映射规则
 
@@ -313,16 +313,16 @@ Phase 2 结束后，基于项目指纹自动推荐维度组合。
 
 ```
 Phase 1: 探索理解
-  ├─ [有路径] 读取 CLAUDE.md/AGENTS.md/README.md → 扫描技术元数据 → 生成项目指纹 → 匹配架构模式
+  ├─ [有路径] 读取 CLAUDE.md/AGENTS.md/README.md → 扫描技术元数据 → 生成项目画像 → 匹配架构模式
   ├─ [有文档] 读取文档 → 提取架构要素
-  ├─ [无参数] 对话引导收集项目信息（跳过指纹引擎）
+  ├─ [无参数] 对话引导收集项目信息（跳过架构了解）
   └─ 输出: 现状摘要（含画像，如果有的话）→ 用户确认
 
 Phase 2: 架构对话
   ├─ 一问一答深入理解（目标、约束、痛点）
   ├─ 检测反模式（如果有代码分析），主动预警
   ├─ 识别场景类型：新架构 → 侧重方案设计 / 重构 → 侧重问题诊断
-  ├─ 上下文驱动维度推荐（基于指纹+映射规则）
+  ├─ 上下文驱动维度推荐（基于画像+映射规则）
   ├─ 记录潜在 ADR 决策点
   └─ 用户确认维度选择
 
@@ -344,12 +344,12 @@ Phase 4: 报告
 ```mermaid
 flowchart TD
     Start([用户调用 /arch-brain]) --> Parse{有输入参数?}
-    Parse -->|路径/文档| P1_Fingerprint[Phase 1: 指纹分析 + 探索]
+    Parse -->|路径/文档| P1_Discovery[Phase 1: 架构了解 + 探索]
     Parse -->|无参数| P1_Dialogue[Phase 1: 对话引导收集]
-    P1_Fingerprint --> P1_Summary[输出现状摘要 + 画像]
+    P1_Discovery --> P1_Summary[输出现状摘要 + 画像]
     P1_Dialogue --> P1_Summary
     P1_Summary --> P1_Confirm{用户确认?}
-    P1_Confirm -->|否| P1_Fingerprint
+    P1_Confirm -->|否| P1_Discovery
     P1_Confirm -->|是| P2[Phase 2: 架构对话]
     P2 --> P2_Anti[检测反模式预警]
     P2_Anti --> P2_Scenario{场景类型?}
@@ -449,7 +449,7 @@ report-template.md 需包含以下完整结构：
 
 | 文件 | 位置 | 说明 |
 |------|------|------|
-| `SKILL.md` | `~/.claude/skills/arch-brain/` | 主文件：流程定义、指纹引擎指令、模式库、评分标准、顾问风格、可视化和 ADR 指令 |
+| `SKILL.md` | `~/.claude/skills/arch-brain/` | 主文件：流程定义、架构了解指令、模式库、评分标准、顾问风格、可视化和 ADR 指令 |
 | `report-template.md` | `~/.claude/skills/arch-brain/` | 报告模板：含项目画像、核心观点、Mermaid 图占位、风险情景、ADR 附录 |
 
 同时更新项目 repo 中的副本以便版本管理。
@@ -461,7 +461,7 @@ report-template.md 需包含以下完整结构：
 | 决策 | 理由 |
 |------|------|
 | 统一设计（不分 v1/v2） | Skill 文件尚未创建，一步到位避免返工 |
-| 指纹引擎通过 prompt 指令实现 | Skill 本质是 prompt 文件，无需代码 |
+| 架构了解通过 prompt 指令实现 | Skill 本质是 prompt 文件，无需代码 |
 | 模式库内置在 SKILL.md（精简表格） | 避免增加文件数，控制 token 预算 |
 | 优先读 CLAUDE.md 而非扫描依赖 | 自述文件含"为什么"的上下文 |
 | 保持两个文件结构 | 所有优化融入现有结构，不增加复杂度 |
@@ -470,7 +470,7 @@ report-template.md 需包含以下完整结构：
 | Mermaid 图限制 15 节点 | 架构图应简洁，不挤占报告篇幅 |
 | 风险情景选 2-3 个 | 聚焦最相关情景，避免分析膨胀 |
 | SKILL.md 目标 1200-1500 词 | 平衡指令完整性与上下文预算 |
-| 无参数模式跳过指纹引擎 | 无代码可分析时直接对话收集信息 |
+| 无参数模式跳过架构了解 | 无代码可分析时直接对话收集信息 |
 | 流程图使用 Mermaid 格式 | 与报告中的可视化格式保持一致 |
 
 ---
@@ -480,7 +480,7 @@ report-template.md 需包含以下完整结构：
 1. **文件验证**：`ls ~/.claude/skills/arch-brain/` 确认两个文件存在
 2. **Frontmatter 验证**：`head -4 SKILL.md` 确认 YAML 格式正确
 3. **字数验证**：`wc -w SKILL.md` 确认在 1200-1500 词范围内
-4. **内容完整性**：检查 SKILL.md 包含所有章节（指纹引擎、模式库、证据化评分、风险情景、顾问风格、可视化、ADR、维度推荐映射）
+4. **内容完整性**：检查 SKILL.md 包含所有章节（架构了解、模式库、证据化评分、风险情景、顾问风格、可视化、ADR、维度推荐映射）
 5. **模板完整性**：检查 report-template.md 包含新增章节（项目画像、核心观点、Mermaid 图、风险情景、ADR 附录）
 6. **功能测试**：用 `/arch-brain` 对一个实际项目执行评审，验证：
    - 是否自动读取 CLAUDE.md/README.md

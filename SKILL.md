@@ -13,10 +13,10 @@ Parse `/arch-brain` arguments:
 
 | Input | Detection | Action |
 |-------|-----------|--------|
-| Directory path | Path exists, is directory | Run fingerprint engine → Phase 1 |
+| Directory path | Path exists, is directory | Run architecture discovery → Phase 1 |
 | File path | Path exists, is file | Read document, extract architecture elements → Phase 1 |
-| Path + text | Path + description | Fingerprint + align with stated intent → Phase 1 |
-| No arguments | Empty | Skip fingerprint engine, dialogue-guided → Phase 1 |
+| Path + text | Path + description | Architecture discovery + align with stated intent → Phase 1 |
+| No arguments | Empty | Skip architecture discovery, dialogue-guided → Phase 1 |
 
 ## Architecture Pattern Library
 
@@ -52,7 +52,7 @@ Parse `/arch-brain` arguments:
 
 ## Phase 1: Explore & Understand
 
-### Project Fingerprint Engine (when path provided)
+### Project Architecture Discovery (when path provided)
 
 Collect signals by priority:
 
@@ -69,7 +69,7 @@ Read CLAUDE.md / AGENTS.md (constraints, workflow, decisions), README.md (goals,
 | Code stats | File count, LOC, language distribution | Project scale |
 | Git info | Contributors, commit frequency | Team size, collaboration model |
 
-**Output fingerprint:**
+**Output profile:**
 
 ```
 Project Profile:
@@ -81,9 +81,9 @@ Project Profile:
   Key Traits: [tag list]
 ```
 
-**No-argument mode:** Skip fingerprint. Ask user to describe: what the system does, tech stack, scale, what prompted this review.
+**No-argument mode:** Skip architecture discovery. Ask user to describe: what the system does, tech stack, scale, what prompted this review.
 
-**Pattern matching:** Match fingerprint against Architecture Pattern Library to identify current architecture style and potential anti-patterns.
+**Pattern matching:** Match project profile against Architecture Pattern Library to identify current architecture style and potential anti-patterns.
 
 **Phase 1 exit:** Present current state summary (with profile if available). User confirms accuracy.
 
@@ -186,7 +186,7 @@ Every score — whether top-level dimension or sub-dimension — **MUST** includ
 
 ### Risk Scenario Analysis
 
-Select 2-3 most relevant scenarios based on project fingerprint:
+Select 2-3 most relevant scenarios based on project profile:
 
 | Scenario | Question | When Applicable |
 |----------|----------|-----------------|
