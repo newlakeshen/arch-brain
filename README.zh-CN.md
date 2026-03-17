@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-一个充当观点鲜明的资深软件架构师顾问角色的 Claude Code skill，用于架构评审、重构分析和架构方案设计，支持证据化评分、风险情景推演和结构化报告输出。
+一个适用于 Claude Code 和 Codex CLI 的 skill，充当观点鲜明的资深软件架构师顾问，用于架构评审、重构分析和架构方案设计，支持证据化评分、风险情景推演和结构化报告输出。
 
 ## 功能特性
 
@@ -30,15 +30,22 @@
 ## 安装
 
 ```bash
-git clone https://github.com/lakeshen/arch-brain.git
+git clone https://github.com/newlakeshen/arch-brain.git
 cd arch-brain
-./install.sh
 ```
 
-卸载：
+**Claude Code**（`~/.claude/skills/arch-brain/`）：
 
 ```bash
-./install.sh uninstall
+./install_to_claude.sh
+./install_to_claude.sh uninstall  # 卸载
+```
+
+**Codex CLI**（`~/.codex/skills/arch-brain/`）：
+
+```bash
+./install_to_codex.sh
+./install_to_codex.sh uninstall  # 卸载
 ```
 
 ## 使用方式
@@ -96,9 +103,10 @@ cd arch-brain
 
 ```
 arch-brain/
-├── install.sh                        # 安装/卸载脚本
-├── SKILL.md                          # Skill 主文件（安装到 ~/.claude/skills/）
-├── report-template.md                # 报告模板（安装到 ~/.claude/skills/）
+├── install_to_claude.sh              # 安装到 Claude Code（~/.claude/skills/）
+├── install_to_codex.sh               # 安装到 Codex CLI（~/.codex/skills/）
+├── SKILL.md                          # Skill 主文件
+├── report-template.md                # 报告模板
 ├── CLAUDE.md                         # 项目上下文和工作流约束
 ├── README.md                         # 英文文档
 ├── README.zh-CN.md                   # 中文文档

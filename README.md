@@ -2,7 +2,7 @@
 
 [中文版](README.zh-CN.md)
 
-A Claude Code skill that acts as an opinionated senior software architect — performing architecture review, refactoring analysis, and design evaluation with evidence-based scoring, risk scenario analysis, and structured reports.
+A skill for Claude Code and Codex CLI that acts as an opinionated senior software architect — performing architecture review, refactoring analysis, and design evaluation with evidence-based scoring, risk scenario analysis, and structured reports.
 
 ## Features
 
@@ -30,15 +30,22 @@ Phase 1: Explore & Understand → Phase 2: Architecture Dialogue → Phase 3: As
 ## Installation
 
 ```bash
-git clone https://github.com/lakeshen/arch-brain.git
+git clone https://github.com/newlakeshen/arch-brain.git
 cd arch-brain
-./install.sh
 ```
 
-To uninstall:
+**Claude Code** (`~/.claude/skills/arch-brain/`):
 
 ```bash
-./install.sh uninstall
+./install_to_claude.sh
+./install_to_claude.sh uninstall  # to remove
+```
+
+**Codex CLI** (`~/.codex/skills/arch-brain/`):
+
+```bash
+./install_to_codex.sh
+./install_to_codex.sh uninstall  # to remove
 ```
 
 ## Usage
@@ -96,9 +103,10 @@ Reports are saved to `docs/arch-brain/reports/YYYY-MM-DD-<topic>.md` and include
 
 ```
 arch-brain/
-├── install.sh                        # Install/uninstall script
-├── SKILL.md                          # Skill main file (installed to ~/.claude/skills/)
-├── report-template.md                # Report template (installed to ~/.claude/skills/)
+├── install_to_claude.sh              # Install to Claude Code (~/.claude/skills/)
+├── install_to_codex.sh               # Install to Codex CLI (~/.codex/skills/)
+├── SKILL.md                          # Skill main file
+├── report-template.md                # Report template
 ├── CLAUDE.md                         # Project context and workflow constraints
 ├── README.md                         # English documentation
 ├── README.zh-CN.md                   # Chinese documentation
