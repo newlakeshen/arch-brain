@@ -7,6 +7,8 @@ description: Use when manually invoked to perform architecture review, refactori
 
 Senior software architect skill — an opinionated advisor who delivers evidence-based architecture reviews with clear judgments. **Says "must" and "should not" when warranted.**
 
+**Output language:** All user-facing output (dialogue, reports, labels) MUST use Chinese. Use Chinese names for patterns, anti-patterns, dimensions, and technical terms — e.g., "上帝类" not "God Class", "死代码" not "Dead Code", "循环依赖" not "Circular Dependencies".
+
 ## Input Handling
 
 Parse `/arch-brain` arguments:
@@ -22,33 +24,33 @@ Parse `/arch-brain` arguments:
 
 ### Patterns (identification and comparison)
 
-| Pattern | Signals | Suited For |
+| Pattern (中文名) | Signals | Suited For |
 |---------|---------|------------|
-| Layered | controllers/services/repositories | Most web apps |
-| Microservices | Multiple deploy units, inter-service comms, API gateway | Large scale, multi-team |
-| Hexagonal | Ports/adapters, core domain independent | Complex business logic |
-| CQRS | Read/write separation, independent command/query | High-concurrency R/W |
-| Event-Driven | Message queues, event bus, pub/sub | Async processing, decoupling |
-| Serverless | FaaS, trigger-based | Low traffic, event workloads |
-| Modular Monolith | Single deploy, clear internal boundaries | Medium projects, early stage |
+| 分层架构 | controllers/services/repositories | Most web apps |
+| 微服务 | Multiple deploy units, inter-service comms, API gateway | Large scale, multi-team |
+| 六边形架构 | Ports/adapters, core domain independent | Complex business logic |
+| CQRS（读写分离） | Read/write separation, independent command/query | High-concurrency R/W |
+| 事件驱动 | Message queues, event bus, pub/sub | Async processing, decoupling |
+| 无服务器架构 | FaaS, trigger-based | Low traffic, event workloads |
+| 模块化单体 | Single deploy, clear internal boundaries | Medium projects, early stage |
 
 ### Anti-patterns (detection in Phase 2)
 
-| Anti-pattern | Signal | Risk |
+| Anti-pattern (中文名) | Signal | Risk |
 |--------------|--------|------|
-| Big Ball of Mud | No module boundaries, high coupling | Maintenance cost grows exponentially |
-| Distributed Monolith | Microservice deploy, shared DB, sync chains | Worst of both worlds |
-| Premature Microservices | Small team / early project with microservices | Ops complexity far exceeds benefit |
-| God Class/Module | Single module, too many responsibilities | Hard to test, high change risk |
-| Circular Dependencies | Bidirectional module dependencies | Cannot deploy/test independently |
+| 泥球架构 | No module boundaries, high coupling | Maintenance cost grows exponentially |
+| 分布式单体 | Microservice deploy, shared DB, sync chains | Worst of both worlds |
+| 过早微服务化 | Small team / early project with microservices | Ops complexity far exceeds benefit |
+| 上帝类/上帝模块 | Single module, too many responsibilities | Hard to test, high change risk |
+| 循环依赖 | Bidirectional module dependencies | Cannot deploy/test independently |
 
 ### Evolution Paths (for refactoring)
 
 | From | To | Key Steps |
 |------|----|-----------|
-| Monolith | Modular Monolith | Identify boundaries, extract modules, define interfaces |
-| Modular Monolith | Microservices | Independent DBs, API gateway, service discovery |
-| Synchronous | Event-Driven | Message queue, event sourcing, eventual consistency |
+| 单体 | 模块化单体 | Identify boundaries, extract modules, define interfaces |
+| 模块化单体 | 微服务 | Independent DBs, API gateway, service discovery |
+| 同步架构 | 事件驱动 | Message queue, event sourcing, eventual consistency |
 
 ## Phase 1: Explore & Understand
 
