@@ -138,6 +138,52 @@ Rule: Always recommend ≥3 core + ≥2 auxiliary. State reasoning: "Based on yo
 - ⚠️ **Watch** — Latent risk, plan to address (score 4-6)
 - 🚨 **Must Improve** — Blocking progress, act now (score 1-3)
 
+### Evidence Quality Standard
+
+Every score — whether top-level dimension or sub-dimension — **MUST** include structured evidence. Vague one-liners are unacceptable.
+
+**Required evidence per score:**
+
+| Element | What to Include | Bad Example | Good Example |
+|---------|----------------|-------------|--------------|
+| **Location** | File path(s) with line ranges | "2 个文件中重复" | `trainer.py:45-120`, `model.py:200-275` |
+| **Observation** | Concrete finding with quantified metrics | "超参数硬编码" | "23 个魔法数字硬编码于 `config.py:12-35`（如 `lr=0.001`, `batch_size=64`），无配置文件或 CLI 覆盖" |
+| **Impact** | Consequence in effort/risk/cost terms | "训练逻辑重复" | "新增模型需修改 2 文件 6 处代码，预估 2 人日；引入策略模式后可降至 2 小时" |
+| **Benchmark** | Current state vs expected practice | (missing) | "行业实践：单一训练入口 + 策略模式；当前：分散在 2 个文件中的近似循环" |
+
+**Full evidence examples:**
+
+```
+❌ Bad (unacceptable):
+   模型扩展 3/10 🚨 — 训练逻辑在 2 个文件中重复，超参数硬编码
+
+✅ Good (required quality):
+   模型扩展 3/10 🚨
+   证据：`trainer.py:45-120` 与 `model.py:200-275` 包含近乎相同的训练循环
+   （280 LOC，仅优化器选择不同）。超参数硬编码于 `config.py:12-35`，
+   共 23 个魔法数字（lr=0.001, batch_size=64 等），无配置文件或 CLI 覆盖。
+   影响：新增模型需改 2 文件 6 处，预估 2 人日；抽取为策略模式后降至 2h。
+   基准：行业实践为单一训练入口 + 配置驱动，当前差距显著。
+
+❌ Bad (unacceptable):
+   数据源 5/10 ⚠️ — Tushare 直接耦合，但 OfflineDataManager 已是事实抽象层
+
+✅ Good (required quality):
+   数据源 5/10 ⚠️
+   证据：`data_fetcher.py:30-89` 直接调用 `tushare.pro_api()` 共 12 处，
+   无接口抽象。但 `offline_data_manager.py` 已封装离线数据访问
+   （覆盖 80% 读取路径），形成事实上的抽象层。
+   影响：切换数据源需改 12 个调用点（约 5 人日）；
+   若先将在线调用收口至 OfflineDataManager 模式，迁移成本降至 1 人日。
+   基准：应有统一 DataProvider 接口，当前离线路径已达标，在线路径未达标。
+```
+
+**Sub-dimension tables** (e.g., scalability axes, security layers) must use expanded format:
+
+| Sub-dimension | Score | Evidence Summary | Key Files | Quantified Impact |
+|---------------|-------|-----------------|-----------|-------------------|
+| [name] | [N/10] | [2-3 sentences with metrics] | [file:lines] | [effort/risk in concrete terms] |
+
 ### Risk Scenario Analysis
 
 Select 2-3 most relevant scenarios based on project fingerprint:
