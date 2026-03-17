@@ -30,8 +30,15 @@
 ## 安装
 
 ```bash
-mkdir -p ~/.claude/skills/arch-brain
-cp SKILL.md report-template.md ~/.claude/skills/arch-brain/
+git clone https://github.com/lakeshen/arch-brain.git
+cd arch-brain
+./install.sh
+```
+
+卸载：
+
+```bash
+./install.sh uninstall
 ```
 
 ## 使用方式
@@ -89,8 +96,9 @@ cp SKILL.md report-template.md ~/.claude/skills/arch-brain/
 
 ```
 arch-brain/
-├── SKILL.md                          # Skill 主文件（同时安装到 ~/.claude/skills/）
-├── report-template.md                # 报告模板（同时安装到 ~/.claude/skills/）
+├── install.sh                        # 安装/卸载脚本
+├── SKILL.md                          # Skill 主文件（安装到 ~/.claude/skills/）
+├── report-template.md                # 报告模板（安装到 ~/.claude/skills/）
 ├── CLAUDE.md                         # 项目上下文和工作流约束
 ├── README.md                         # 英文文档
 ├── README.zh-CN.md                   # 中文文档

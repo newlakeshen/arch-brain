@@ -30,8 +30,15 @@ Phase 1: Explore & Understand → Phase 2: Architecture Dialogue → Phase 3: As
 ## Installation
 
 ```bash
-mkdir -p ~/.claude/skills/arch-brain
-cp SKILL.md report-template.md ~/.claude/skills/arch-brain/
+git clone https://github.com/lakeshen/arch-brain.git
+cd arch-brain
+./install.sh
+```
+
+To uninstall:
+
+```bash
+./install.sh uninstall
 ```
 
 ## Usage
@@ -89,8 +96,9 @@ Reports are saved to `docs/arch-brain/reports/YYYY-MM-DD-<topic>.md` and include
 
 ```
 arch-brain/
-├── SKILL.md                          # Skill main file (also installed to ~/.claude/skills/)
-├── report-template.md                # Report template (also installed to ~/.claude/skills/)
+├── install.sh                        # Install/uninstall script
+├── SKILL.md                          # Skill main file (installed to ~/.claude/skills/)
+├── report-template.md                # Report template (installed to ~/.claude/skills/)
 ├── CLAUDE.md                         # Project context and workflow constraints
 ├── README.md                         # English documentation
 ├── README.zh-CN.md                   # Chinese documentation

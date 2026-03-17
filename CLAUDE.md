@@ -4,6 +4,7 @@ Claude Code skill，充当资深软件架构师（观点鲜明的顾问风格）
 
 ## 项目结构
 
+- `install.sh` — 安装/卸载脚本
 - `SKILL.md` — Skill 主文件（项目 repo 副本，安装时复制到 skill 目录）
 - `report-template.md` — 报告模板（项目 repo 副本）
 - `README.md` — 英文文档
@@ -20,8 +21,10 @@ Claude Code skill，充当资深软件架构师（观点鲜明的顾问风格）
 ## 安装
 
 ```bash
-mkdir -p ~/.claude/skills/arch-brain
-cp SKILL.md report-template.md ~/.claude/skills/arch-brain/
+git clone <repo-url>
+cd arch-brain
+./install.sh          # 安装
+./install.sh uninstall # 卸载
 ```
 
 ## 使用方式
