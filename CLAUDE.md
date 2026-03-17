@@ -1,19 +1,21 @@
 # arch-brain
 
-Claude Code skill，充当资深软件架构师，用于架构评审、重构分析和架构方案设计。
+Claude Code skill，充当资深软件架构师（观点鲜明的顾问风格），用于架构评审、重构分析和架构方案设计。支持项目指纹分析、证据化评分、风险情景推演和 ADR 生成。
 
 ## 项目结构
 
+- `SKILL.md` — Skill 主文件（项目 repo 副本，安装时复制到 skill 目录）
+- `report-template.md` — 报告模板（项目 repo 副本）
 - `README.md` — 英文文档
 - `README.zh-CN.md` — 中文文档
-- `docs/superpowers/specs/` — 设计规格文档
+- `docs/superpowers/specs/2026-03-17-arch-brain-v2-design.md` — v2 完整设计规格
 - `docs/superpowers/plans/` — 实施计划文档
 - Skill 安装目录: `~/.claude/skills/arch-brain/`
 
 ## Skill 文件
 
-- `SKILL.md` — 主文件（流程定义、评估维度、控制逻辑），含 YAML frontmatter（`name` + `description`）
-- `report-template.md` — 报告输出模板，被 SKILL.md Phase 4 引用
+- `SKILL.md` — 主文件（1200-1500 词），含 YAML frontmatter，包含：项目指纹引擎、架构模式库、证据化评分体系（6 维度具体标准）、判定标签（✅/⚠️/🚨）、风险情景分析、顾问风格定义、Mermaid 可视化指令、ADR 生成指令、上下文驱动维度推荐映射
+- `report-template.md` — 报告模板，含：项目画像(S0)、架构师核心观点(S1)、Mermaid 图(S2/S6)、风险情景分析(S5)、ADR 附录，被 SKILL.md Phase 4 引用
 
 ## 安装
 
