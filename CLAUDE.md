@@ -10,8 +10,6 @@
 - `report-template.md` — 报告模板（项目 repo 副本）
 - `README.md` — 英文文档
 - `README.zh-CN.md` — 中文文档
-- `docs/superpowers/specs/2026-03-17-arch-brain-v2-design.md` — v2 完整设计规格
-- `docs/superpowers/plans/` — 实施计划文档
 - Skill 安装目录: `~/.claude/skills/arch-brain/`（Claude Code）或 `~/.codex/skills/arch-brain/`（Codex CLI）
 
 ## Skill 文件
